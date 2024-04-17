@@ -4,8 +4,14 @@ import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 export default function App() {
+
+  const {isLoading, isLogged} = useGlobalContext();
+
+  if(!isLoading && isLogged) return <Redirect href="/home" />
+
   return (
     <SafeAreaView className="bg-primary h-full ">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -28,14 +34,14 @@ export default function App() {
             </Text>
             <Image
               source={images.path}
-              className="w-[136px] h-[15px] absolute -bottom-2 -right-8"
+              className="w-[136px] h-[15px] absolute -bottom-2 -right-8 xs:-right-[-70px]"
               resizeMode="contain"
             />
           </View>
 
           <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where creativity meets innovation: embark on a journey of limitless
-            exploration with Aora
+            Where Creativity Meets Innovation: Embark on a Journey of Limitless
+            Exploration with Aora
           </Text>
 
           <CustomButton
